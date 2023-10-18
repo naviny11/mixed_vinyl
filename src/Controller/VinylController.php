@@ -21,7 +21,17 @@ class VinylController extends AbstractController
     #[Route('/homepage')]
     public function homepage(): Response
     {
-        return new Response('Title : PB and Jams');
+        $tracks = [
+            'Namo Namo',
+            'Chikni chameli',
+            'enna sonna',
+            'ammche papa ne gampati aanla'
+        ];
+        return $this->render('vinyl/homepage.html.twig',[
+            'title' => 'PB and Jams',
+            'tracks' => $tracks
+
+        ]);
     }
 
     #[Route('/browse/{slug}')]

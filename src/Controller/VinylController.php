@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class VinylController extends AbstractController
 {
@@ -18,7 +19,7 @@ class VinylController extends AbstractController
         ]);
     }
 
-    #[Route('/homepage')]
+    #[Route('/', name:'app_homepage')]
     public function homepage(): Response
     {
         $tracks = [
@@ -27,18 +28,28 @@ class VinylController extends AbstractController
             'enna sonna',
             'ammche papa ne gampati aanla'
         ];
+        //dd($tracks);
         return $this->render('vinyl/homepage.html.twig',[
             'title' => 'PB and Jams',
             'tracks' => $tracks
 
         ]);
+
+        /* $html = $twig->render('vinyl/homepage.html.twig',[
+            'title' => 'PB and Jams',
+            'tracks' => $tracks
+
+        ]);
+
+        return new Response($html); */
     }
 
-    #[Route('/browse/{slug}')]
+    #[Route('/browse/{slug}', name:'app_browse')]
     public function browse(string $slug = null): Response 
     {
-        $title = $slug == null ? 'All Genres' : $slug;
 
-        return new Response('Genre: '.$title);
+        return $this->render('/vinyl/browse.html.twig',[
+            'title' => $slug
+        ]);
     }
 }

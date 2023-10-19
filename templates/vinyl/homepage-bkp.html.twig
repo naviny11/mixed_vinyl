@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Display track list | {{ parent() }} {% endblock %}
+{# To do something #}
+{% block body %}
+<h1>{{ title }}</h1>
+<div>
+Our track list  : 
+<ul>
+{% for track in tracks %}
+    <li>{{ track | upper }}</li>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}
